@@ -2,8 +2,16 @@ import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { getImgUrl } from "../../utils/getImgUrl";
+import {useDispatch} from "react-redux";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const bookCard = ({ book }) => {
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
+  }
   return (
     <div>
       {/* daisy ui card */}
@@ -34,7 +42,9 @@ const bookCard = ({ book }) => {
             <div className="badge shadow-md m-2 ">
               {book.category}
             </div>
-            <button className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
+            <button 
+            onClick={() => handleAddToCart(book)}
+            className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
               <FiShoppingCart className="" />
               <span>Add to Cart</span>
             </button>

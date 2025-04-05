@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/home/Home.jsx";
 import About from "../pages/about/About.jsx";
+import Cart from "../pages/books/Cart.jsx";
 import Login from "../../src/components/Login.jsx"
 import Register from "../../src/components/Register.jsx"
 
@@ -19,8 +20,8 @@ const router = createBrowserRouter([
             element: <About/>,
         },
         {
-            path: "/orders",
-            element: <h1>orders</h1>,
+            path: "/cart",
+            element: <Cart/>,
         },
         {
             path: "/login",
