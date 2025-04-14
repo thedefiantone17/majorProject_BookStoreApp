@@ -12,9 +12,16 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    };
+  const onSubmit = async (data) => {
+    try {
+        await loginUser(data.email, data.password);
+        alert("Login successful!");
+        navigate("/")
+    } catch (error) {
+        setMessage("Please provide a valid email and password") 
+        console.error(error)
+    }
+  }
 
   const handleGoogleSignIn = () => {
     

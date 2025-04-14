@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { getImgUrl } from "../../utils/getImgUrl";
 import { removeFromCart, clearCart } from "../../redux/features/cart/cartSlice";
 
@@ -18,20 +18,18 @@ const Cart = () => {
   };
 
   const handleClearCart = () => {
-dispatch(clearCart())
-  }
-
-
+    dispatch(clearCart());
+  };
 
   return (
     <>
-      <div className="flex mt-12 h-full flex-col overflow-hidden bg-primay shadow-xl">
+      <div className="flex mt-12 h-full flex-col overflow-hidden  shadow-xl">
         <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
           <div className="flex items-start justify-between">
             <div className="text-lg font-medium">Shopping cart</div>
             <div className="ml-3 flex h-7 items-center ">
               <button
-              onClick={handleClearCart}
+                onClick={handleClearCart}
                 type="button"
                 className="relative -m-2 py-1 px-2 bg-red-500 text-white rounded-md hover:bg-secondary transition-all duration-200 cursor-pointer "
               >
@@ -47,11 +45,17 @@ dispatch(clearCart())
                   {cartItems.map((product) => (
                     <li key={product?._id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
-                        <img
-                          alt=""
-                          src={`${getImgUrl(product.coverImage)}`}
-                          className="h-full w-full object-cover object-center"
-                        />
+                        {product?.coverImage ? (
+                          <img
+                            alt={product?.title || "Product image"}
+                            src={getImgUrl(product.coverImage)}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        ) : (
+                          <div className="h-full w-full flex items-center justify-center bg-gray-200 text-sm text-gray-500">
+                            No image
+                          </div>
+                        )}
                       </div>
 
                       <div className="ml-4 flex flex-1 flex-col">
